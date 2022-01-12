@@ -4,13 +4,13 @@ let gameActive = true;
 let currentPlayer = "X";
 let gameState = ["", "", "", "", "", "", "", "", ""];
 
-const winningMessage = () => `Player ${currentPlayer} has won!`;
-const drawMessage = () => `Game ended in a draw!`;
+const winningMessage = () => ` ${currentPlayer}  won!`;
+const drawMessage = () => `It's a draw!`;
 const currentPlayerTurn = () => `It's ${currentPlayer}'s turn`;
 
 statusDisplay.innerHTML = currentPlayerTurn();
 
-const winningConditions = [
+const winningConditions = [ 
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -21,9 +21,9 @@ const winningConditions = [
     [2, 4, 6]
 ];
 
-function handleCellPlayed(clickedCell, clickedCellIndex) {
-    gameState[clickedCellIndex] = currentPlayer;
-    clickedCell.innerHTML = currentPlayer;
+function handleTailPlayed(clickedTail, clickedTailIndex) {
+    gameState[clickedTailIndex] = currentPlayer;
+    clickedTail.innerHTML = currentPlayer;
 }
 
 function handlePlayerChange() {
@@ -63,15 +63,15 @@ function handleResultValidation() {
     handlePlayerChange();
 }
 
-function handleCellClick(clickedCellEvent) {
-    const clickedCell = clickedCellEvent.target;
-    const clickedCellIndex = parseInt(clickedCell.getAttribute('data-cell-index'));
+function handleTailClick(clickedTailEvent) {
+    const clickedTail = clickedTailEvent.target;
+    const clickedTailIndex = parseInt(clickedTail.getAttribute('data-tail-index'));
 
-    if (gameState[clickedCellIndex] !== "" || !gameActive) {
+    if (gameState[clickedTailIndex] !== "" || !gameActive) {
         return;
     }
 
-    handleCellPlayed(clickedCell, clickedCellIndex);
+    handleTailPlayed(clickedTail, clickedTailIndex);
     handleResultValidation();
 }
 
@@ -80,8 +80,8 @@ function handleRestartGame() {
     currentPlayer = "X";
     gameState = ["", "", "", "", "", "", "", "", ""];
     statusDisplay.innerHTML = currentPlayerTurn();
-    document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
+    document.querySelectorAll('.tail').forEach(tail => tail.innerHTML = "");
 }
 
-document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick));
+document.querySelectorAll('.tail').forEach(tail => tail.addEventListener('click', handleTailClick));
 document.querySelector('.game--restart').addEventListener('click', handleRestartGame);

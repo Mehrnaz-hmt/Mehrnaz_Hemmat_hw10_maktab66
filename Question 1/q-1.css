@@ -6,14 +6,14 @@ section {
     text-align: center;
 }
 
-.game--container {
+.board {
     display: grid;
     grid-template-columns: repeat(3, auto);
     width: 306px;
     margin: 50px auto;
 }
 
-.cell {
+.tail {
     font-family: "Permanent Marker", cursive;
     width: 100px;
     height: 100px;
